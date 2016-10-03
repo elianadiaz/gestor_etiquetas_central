@@ -1,0 +1,13 @@
+.container,.container-fluid {
+	margin-left:auto;
+	margin-right:auto
+}
+.container-fluid:after,.container:after,.row:after {
+	display:table;
+	clear:both;
+	content:""
+}
+.container,.container-fluid {
+	padding-left:.9375rem;
+	padding-right:.9375rem
+}

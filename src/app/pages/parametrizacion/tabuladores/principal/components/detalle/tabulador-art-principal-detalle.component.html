@@ -1,0 +1,186 @@
+<div class="container-fluid">
+	<div class="row">				
+		<div class="col-md-12 col-lg-12 ">
+			  <br>
+        <h4 style="text-align: center;">Tabuladores Art&iacute;culo Principal</h4>
+        <br>
+			
+  			<div class="card">
+  				<div class="card-header card-primary card-inverse">
+  					<span class="card-title">Agregar</span>
+  				</div>
+  				<div class="card-block">
+  					<form>              
+              <div class="form-group">
+                <label for="inputRubro">Rubro</label>
+                <div *ngIf="esEdicion">
+                    <input placeholder="Rubro" [ngModel]="descripcionRubroSeleccionado" id="inputRubroDisabled" disabled="" class="form-control" type="text">
+                </div>
+                <div *ngIf="!esEdicion">
+                    <select class="form-control" [ngModel]="codigoErpRubroSeleccionado" (ngModelChange)="onRubroSeleccionado($event)">
+                        <option *ngFor="let familia of familias" [value]="familia.getCodigoErpRubro()">{{familia.getDescripcionRubro()}}</option>
+                    </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputSubrubro">Subrubro</label>
+                <div *ngIf="esEdicion">
+                    <input placeholder="Subrubro" [ngModel]="descripcionSubrubroSeleccionado" id="inputSubrubroDisabled" disabled="" class="form-control" type="text">
+                </div>
+                <div *ngIf="!esEdicion">
+                    <select class="form-control" [(ngModel)]="codigoErpSubrubroSeleccionado" (ngModelChange)="onSubrubroSeleccionado($event)">
+                        <option *ngFor="let item of subrubros" [value]="item.getCodigoErpSubrubro()"> {{item.getDescripcionSubrubro()}}</option>
+                    </select>
+                </div>                
+              </div>
+              <div class="form-group">
+                <label for="inputCaracteristicaA">Caracter&iacute;stica A</label>
+                <div *ngIf="esEdicion">
+                    <input placeholder="Caracter&iacute;stica A" [ngModel]="descripcionCaracteristicaASeleccionada" id="inputCaracteristicaADisabled" disabled="" class="form-control" type="text">
+                </div>
+                <div *ngIf="!esEdicion"> 
+                    <select class="form-control" [(ngModel)]="codigoErpCaracteristicaASeleccionada" (ngModelChange)="onCaracteristicaASeleccionada($event)">
+                        <option *ngFor="let item of caracteristicasA" [value]="item.getCodigoErpCaracteristicaA()">{{item.getDescripcionCaracteristicaA()}}</option>
+                    </select>
+                </div>                
+              </div>
+              <div class="form-group">
+                <label for="inputCaracteristicaB">Caracter&iacute;stica B</label>
+                <div *ngIf="esEdicion">
+                    <input placeholder="Caracter&iacute;stica B" [ngModel]="descripcionCaracteristicaBSeleccionada" id="inputCaracteristicaADisabled" disabled="" class="form-control" type="text">
+                </div>
+                <div *ngIf="!esEdicion"> 
+                    <select class="form-control" [(ngModel)]="codigoErpCaracteristicaBSeleccionada" (ngModelChange)="onCaracteristicaBSeleccionada($event)">
+                        <option *ngFor="let item of caracteristicasB" [value]="item.getCodigoErpCaracteristicaB()">{{item.getDescripcionCaracteristicaB()}}</option>
+                    </select>
+                </div>                
+              </div>						
+              
+              <div *ngIf="!esEdicion">
+                <hr>
+                <button type="submit" class="btn btn-primary" (click)="onBuscarTabuladores()">Buscar Tabuladores</button>              
+                <button *ngIf="!buscoTabuladores" type="submit" class="btn btn-primary" [routerLink]="['ConfiguracionTabArtPrincipal']">Salir</button>
+                <br>
+                <br>
+              </div>              
+
+              <div *ngIf="buscoTabuladores">
+                <div *ngIf="yaCreado">
+                  <alert dismissible="true">
+                    <div role="alert" class="alert alert-danger alert-dismissible">
+                    La combinación seleccionada (rubro, subrubro, caracter&iacute;stica A y B) posee tabulador principal creado.
+                    </div>
+                  </alert>  
+                </div>
+
+                <div *ngIf="!tieneTabuladores && !yaCreado">
+                  <alert dismissible="true">
+                    <div role="alert" class="alert alert-danger alert-dismissible">
+                    La combinación seleccionada (rubro, subrubro, caracter&iacute;stica A y B) no posee tabuladores.
+                    </div>
+                  </alert>  
+                </div>
+                
+                <div *ngIf="tieneTabuladores  && !yaCreado" class="card"> 
+                  <hr>
+                  <div class="col-md-12 col-lg-12" style="text-align: center;">
+                      <div class="form-group col-xs-4">
+                        <button type="submit" class="btn btn-secondary" (click)="onAgregar()"><i class="fa fa-angle-right" aria-hidden="true"></i>&nbsp; Agregar</button>
+                      </div>
+                      <div class="form-group col-xs-4">
+                        <button type="submit" class="btn btn-secondary" (click)="onQuitarTodos()"><i class="fa fa-angle-double-left" aria-hidden="true"></i>&nbsp; Quitar todos</button>
+                                      <button type="submit" class="btn btn-secondary" (click)="onQuitar()"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp; Quitar</button>
+                      </div>
+                      <div class="form-group col-xs-4">
+                        <button type="submit" class="btn btn-secondary"><i class="fa fa-angle-up" aria-hidden="true"></i>&nbsp; Subir</button>
+                                      <button type="submit" class="btn btn-secondary"><i class="fa fa-angle-down" aria-hidden="true"></i>&nbsp; Bajar</button>
+                      </div>                                  
+                  </div>
+
+                  <div class="card-block">
+                    <div class="row">
+                      <div class="col-md-6 text-xs-left">
+                          <div class="card card-default card-block" style="border: none;">
+                              <blockquote class="card-blockquote">
+                                <h4 class="text-default text-xs-center">Tabuladores Disponibles</h4>
+
+                                <div class="card card-block">
+                                  <div class="table-responsive">
+                                    <table class="table table-bordered" style="text-align: center;">
+                                      <thead class="thead-default">
+                                          <tr>                                              
+                                              <th style="text-align: center;">Tabulador</th>
+                                              <th style="text-align: center;">
+                                                <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                              </th>                                          
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr *ngFor="let tabulador of tabuladores">                                          
+                                          <td>{{tabulador.getDescripcion()}}</td>
+                                          <td>
+                                            <label>
+                                              <input type="checkbox" value="{{tabulador.getId()}}" 
+                                              (change)="checkboxes[$event.target.getAttribute('value')]=$event.target.checked"
+                                              [checked]="checkboxes[tabulador.getId()]">
+                                            </label>
+                                          </td>
+                                        </tr>                                   
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </blockquote>
+                          </div>
+                      </div>                      
+                      <div class="col-md-6 text-xs-right">
+                          <div class="card card-default card-block" style="border: none;">
+                              <blockquote class="card-blockquote">
+                                <h4 class="text-default text-xs-center">Tabuladores seleccionados</h4>
+                                
+                                <div class="card card-block">
+                                  <div class="table-responsive">
+                                    <table class="table table-bordered" style="text-align: center;">
+                                      <thead class="thead-default">
+                                          <tr>
+                                              <th style="text-align: center;">Tabulador</th>
+                                              <th style="text-align: center;">
+                                                <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                                              </th>                               
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr *ngFor="let tabulador of tabuladoresSeleccionados">                                          
+                                          <td>{{tabulador.getDescripcion()}}</td>
+                                          <td>
+                                            <label>
+                                              <input type="checkbox" value="{{tabulador.getId()}}" 
+                                              (change)="checkboxesSeleccionados[$event.target.getAttribute('value')]=$event.target.checked"
+                                              [checked]="checkboxesSeleccionados[tabulador.getId()]">
+                                            </label>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </blockquote>
+                          </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <hr>
+                <button type="submit" class="btn btn-primary" (click)="onGuardarTabuladorPrincipal()">Guardar</button>
+                <button type="submit" class="btn btn-primary" [routerLink]="['ConfiguracionTabArtPrincipal']">Salir</button>
+              </div>
+                					
+  					</form>
+  				</div>
+  			</div>  			
+			
+  		</div>
+	</div>
+</div>

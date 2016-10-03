@@ -1,22 +1,30 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>GestorEtiquetas</title>
   <base href="/">
-
-  {{#unless environment.production}}
-  <script src="/ember-cli-live-reload.js" type="text/javascript"></script>
-  {{/unless}}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  
+  <title>Frávega - Gestor de Etiquetas</title>
+  
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600">
+  <link rel="icon" type="image/x-icon" href="logo-head.jpeg">
+  <link href="/app/assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/app/assets/css/base.css" rel="stylesheet">
+  <link href="/app/assets/css/all.css" rel="stylesheet">  
+  <link href="/app/assets/css/fravega.css" rel="stylesheet">
+ <!--   <link href="/app/assets/css/fravega-desktop-global.css" rel="stylesheet">-->
+  <!-- inject:css -->
+  <!-- endinject -->
 </head>
 <body>
-  <app-root>Loading...</app-root>
 
-  
+  <app-root><div class="loader"></div></app-root>
+ <!-- <app-root>Loading...</app-root>-->
 
-    {{#each scripts.polyfills}}
+ {{#each scripts.polyfills}}
     <script src="{{.}}"></script>
     {{/each}}
     <script>
@@ -24,8 +32,9 @@
         System.import('main');
       }).catch(console.error.bind(console));
     </script>
-
   
+  <script href="/app/assets/js/app.js" type="text/javascript"></script>
+  <script href="/app/assets/js/shims.js" type="text/javascript"></script>
 
 </body>
 </html>

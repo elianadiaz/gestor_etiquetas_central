@@ -1,0 +1,24 @@
+<div class="login-page">
+  <div class="row">
+    <div class="col-lg-4 col-lg-offset-4">
+      <img src="app/assets/img/logo-fravega.png" width="350px" />
+      <br>
+      <br>
+      <br>
+      <h1 style="color: #371f8f; font-weight: bolder">Gestor de Etiquetas</h1>
+      <form role="form">
+        <div class="form-content">
+          <div class="form-group">
+            <input type="text" #usuario ng-model="usuario" class="form-control input-underline input-lg" id="" placeholder="Usuario">
+          </div>
+
+          <div class="form-group">
+            <input type="password" #password class="form-control input-underline input-lg" id="" placeholder="Contraseña">
+          </div>
+        </div>
+        <a class="btn rounded-btn" (click)="doLogin(usuario.value, password.value)" > Log in </a>       
+        
+      </form>
+    </div>  
+  </div>
+</div>

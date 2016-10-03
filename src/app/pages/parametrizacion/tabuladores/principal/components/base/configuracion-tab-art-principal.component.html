@@ -1,0 +1,42 @@
+<div class="container-fluid">
+	<div class="row">				
+		<div class="col-md-12 col-lg-12 ">
+			<br>
+			<h4 style="text-align: center;">Tabuladores Art&iacute;culo Principal</h4>
+			<br>
+  			<div class="table-responsive">
+			    <table class="table">
+			        <thead class="thead-inverse">
+			            <tr>
+			                <th>C&oacute;d. Rubro</th>
+			                <th>Descripci&oacute;n Rubro</th>
+			                <th>C&oacute;d. Subrubro</th>
+			                <th>Descripci&oacute;n Subrubro</th>
+			                <th>Opciones</th>
+			            </tr>
+			        </thead>
+			        <tbody>			            
+			            <tr *ngFor="let tabulador of tabuladores">
+                          <td>{{tabulador.getCodigoErpRubro()}}</td>
+                          <td>{{tabulador.getDescripcionRubro()}}</td>
+                          <td>{{tabulador.getCodigoErpSubrubro()}}</td>
+                          <td>{{tabulador.getDescripcionSubrubro()}}</td>
+                          <td>
+                            <a (click)="irEditar(tabulador.getId())" routerLinkActive="active">
+		                		<i class="fa fa-pencil-square-o" aria-hidden="true"></i><span>&nbsp;</span>
+		                	</a>
+							<a (click)="irEliminar(tabulador.getId())" routerLinkActive="active">
+								<i class="fa fa-trash" aria-hidden="true"></i><span>&nbsp;</span>
+							</a>
+                          </td>
+                        </tr>	            
+			        </tbody>
+			    </table>			    
+			</div>
+
+			<button type="submit" class="btn btn-secondary" [routerLink]="['TabuladorArtPrincipalDetalle']">Agregar</button>
+			<button type="submit" class="btn btn-secondary" [routerLink]="['Base']">Salir</button>
+			
+  		</div>
+	</div>
+</div>

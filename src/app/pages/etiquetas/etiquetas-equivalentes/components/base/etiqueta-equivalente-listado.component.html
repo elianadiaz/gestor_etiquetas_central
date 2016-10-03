@@ -1,0 +1,43 @@
+<div class="container-fluid">
+	<div class="row">				
+		<div class="col-md-12 col-lg-12 ">
+			<br>
+			<h4 style="text-align: center;">Etiquetas Equivalentes</h4>
+			<br>
+  			<div class="table-responsive">
+			    <table class="table">
+			        <thead class="thead-inverse">
+			            <tr>
+			                <th>Art&iacute;culo principal</th>
+			                <th>Descripci&oacute;n</th>
+			                <th>Precio Contado</th>
+			                <th>Opciones</th>
+			            </tr>
+			        </thead>
+			        <tbody>			            
+			            <tr *ngFor="let etiquetaEquivalente of etiquetasEquivalentes">
+                          <td>{{etiquetaEquivalente.getCodigoErpArticuloPrincipal()}}</td>
+                          <td>{{etiquetaEquivalente.getDescripcionArticuloPrincipal()}}</td>
+                          <td>{{etiquetaEquivalente.getPrecioContadoArticuloPrincipal()}}</td>                          
+                          <td>
+                          	<a (click)="irPrevisualizar(etiquetaEquivalente.getId())" routerLinkActive="active">
+                          		<i class="fa fa-search" aria-hidden="true"></i><span>&nbsp;</span>
+		                	</a>
+                            <a (click)="irEditar(etiquetaEquivalente.getId())" routerLinkActive="active">
+		                		<i class="fa fa-pencil-square-o" aria-hidden="true"></i><span>&nbsp;</span>
+		                	</a>
+							<a (click)="irEliminar(etiquetaEquivalente.getId())" routerLinkActive="active">
+								<i class="fa fa-trash" aria-hidden="true"></i><span>&nbsp;</span>
+							</a>
+                          </td>
+                        </tr>	            
+			        </tbody>
+			    </table>			    
+			</div>
+
+			<button type="submit" class="btn btn-secondary" [routerLink]="['EtiquetaEquivalenteDetalle']">Agregar</button>
+			<button type="submit" class="btn btn-secondary" [routerLink]="['Base']">Salir</button>
+			
+  		</div>
+	</div>
+</div>
